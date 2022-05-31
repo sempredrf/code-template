@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<codetemplate	xmlns="http://schemas.borland.com/Delphi/2005/codetemplates"
+				version="1.0.0">
+	<template name="classi" invoke="manual">
+        <point name="classname">
+			<text>
+				MyClass
+			</text>
+			<hint>
+				class name
+			</hint>
+		</point>
+
+        <point name="path">
+			<text>
+				Path.Interface
+			</text>
+			<hint>
+				interface path
+			</hint>
+		</point>
+
+        <point name="interface">
+			<script language="Delphi">
+				InvokeCodeCompletion;
+			</script>
+			<text>
+				iMyInterface
+			</text>
+			<hint>
+				interface that will be implemented
+			</hint>
+		</point>
+		<description>
+            Full class implementing an interface
+		</description>
+		<author>
+
+		</author>
+		<code language="Delphi" context="typedecl" delimiter="|"><![CDATA[
+uses
+  |path|;
+
+type
+  T|classname| = class(TInterfacedObject, |interface|)
+  private
+  public
+    constructor Create();
+    destructor Destroy(); override;
+
+    class function New() : |interface|;
+  end;
+
+implementation
+
+{ T|classname| }
+
+constructor T|classname|.Create;
+begin
+
+end;
+
+destructor T|classname|.Destroy;
+begin
+
+  inherited;
+end;
+
+class function T|classname|.New: |interface|;
+begin
+  Result := Self.Create();
+end;
+
+]]>
+		</code>
+	</template>
+</codetemplate>
