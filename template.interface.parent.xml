@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<codetemplate	xmlns="http://schemas.borland.com/Delphi/2005/codetemplates"
+				version="1.0.0">
+	<template name="classp" invoke="manual">
+        <point name="classname">
+			<text>
+				MyClass
+			</text>
+			<hint>
+				class name
+			</hint>
+		</point>
+
+        <point name="path">
+			<text>
+				Path.Interface
+			</text>
+			<hint>
+				interface path
+			</hint>
+		</point>
+
+        <point name="interface">
+			<text>
+				iMyInterface
+			</text>
+			<hint>
+				interface that will be implemented
+			</hint>
+		</point>
+
+        <point name="interfaceParent">
+			<text>
+				iMyParentInterface
+			</text>
+			<hint>
+				interface parent
+			</hint>
+		</point>
+
+		<description>
+            Full class implementing an interface with parent
+		</description>
+		<author>
+
+		</author>
+		<code language="Delphi" context="typedecl" delimiter="|"><![CDATA[
+uses
+  |path|;
+
+type
+  T|classname| = class(TInterfacedObject, |interface|)
+  private
+    [weak]
+    FParent : |interfaceParent|;
+  public
+    constructor Create(aParent : |interfaceParent|);
+    destructor Destroy(); override;
+
+    class function New(aParent : |interfaceParent|) : |interface|;
+
+    function &End(): |interfaceParent|;
+  end;
+
+implementation
+
+{ T|classname| }
+
+function T|classname|.&End: |interfaceParent|;
+begin
+  result := FParent;
+end;
+
+constructor T|classname|.Create(aParent : |interfaceParent|);
+begin
+  FParent := aParent;
+end;
+
+destructor T|classname|.Destroy;
+begin
+
+  inherited;
+end;
+
+class function T|classname|.New(aParent : |interfaceParent|): |interface|;
+begin
+  Result := Self.Create(aParent);
+end;]]>
+		</code>
+	</template>
+</codetemplate>
