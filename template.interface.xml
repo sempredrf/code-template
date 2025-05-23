@@ -11,6 +11,15 @@
 			</hint>
 		</point>
 
+         <point name="namespace">
+			<text>
+				Unit.NameSpace
+			</text>
+			<hint>
+				unit name space
+			</hint>
+		</point>
+
         <point name="path">
 			<text>
 				Path.Interface
@@ -38,14 +47,19 @@
 
 		</author>
 		<code language="Delphi" context="typedecl" delimiter="|"><![CDATA[
+interface
+
 uses
+  System.SysUtils,
   |path|;
 
 type
   T|classname| = class(TInterfacedObject, |interface|)
   private
+
+  protected
+     constructor Create();
   public
-    constructor Create();
     destructor Destroy(); override;
 
     class function New() : |interface|;
@@ -68,10 +82,10 @@ end;
 
 class function T|classname|.New: |interface|;
 begin
-  Result := Self.Create();
+  result := self.Create();
 end;
 
-]]>
+end.]]>
 		</code>
 	</template>
 </codetemplate>
