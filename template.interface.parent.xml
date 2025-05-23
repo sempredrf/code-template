@@ -11,6 +11,15 @@
 			</hint>
 		</point>
 
+        <point name="namespace">
+			<text>
+				Unit.NameSpace
+			</text>
+			<hint>
+				unit name space
+			</hint>
+		</point>
+
         <point name="path">
 			<text>
 				Path.Interface
@@ -45,7 +54,11 @@
 
 		</author>
 		<code language="Delphi" context="typedecl" delimiter="|"><![CDATA[
+
+interface
+
 uses
+  System.SysUtils,
   |path|;
 
 type
@@ -53,11 +66,12 @@ type
   private
     [weak]
     FParent : |interfaceParent|;
+  protected
+    constructor Create(const aParent : |interfaceParent|);
   public
-    constructor Create(aParent : |interfaceParent|);
     destructor Destroy(); override;
 
-    class function New(aParent : |interfaceParent|) : |interface|;
+    class function New(const aParent : |interfaceParent|) : |interface|;
 
     function &End(): |interfaceParent|;
   end;
@@ -71,7 +85,7 @@ begin
   result := FParent;
 end;
 
-constructor T|classname|.Create(aParent : |interfaceParent|);
+constructor T|classname|.Create(const aParent : |interfaceParent|);
 begin
   FParent := aParent;
 end;
@@ -82,10 +96,12 @@ begin
   inherited;
 end;
 
-class function T|classname|.New(aParent : |interfaceParent|): |interface|;
+class function T|classname|.New(const aParent : |interfaceParent|): |interface|;
 begin
-  Result := Self.Create(aParent);
-end;]]>
+  result := self.Create(aParent);
+end;
+
+end.]]>
 		</code>
 	</template>
 </codetemplate>
